@@ -4,40 +4,70 @@ function getComputerChoice() {
 	return choices[choice];
 }
 
-function play(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
+	const PLAYER = 0;
+	const COMPUTER = 1;
+	const TIE = 2;
+
 	if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
-		console.log(`you both picked ${playerSelection.toLowerCase()}`);
+		return TIE;
 	} else if (
 		playerSelection.toLowerCase() === 'rock' &&
 		computerSelection.toLowerCase() === 'scissors'
 	) {
-		console.log('Player Wins');
+		return PLAYER;
 	} else if (
 		playerSelection.toLowerCase() === 'paper' &&
 		computerSelection.toLowerCase() === 'rock'
 	) {
-		console.log('Player Wins');
+		return PLAYER;
 	} else if (
 		playerSelection.toLowerCase() === 'scissors' &&
 		computerSelection.toLowerCase() === 'paper'
 	) {
-		console.log('Player Wins');
+		return PLAYER;
 	} else if (
 		playerSelection.toLowerCase() === 'rock' &&
 		computerSelection.toLowerCase() === 'paper'
 	) {
-		console.log('Computer Wins');
+		return COMPUTER;
 	} else if (
 		playerSelection.toLowerCase() === 'paper' &&
 		computerSelection.toLowerCase() === 'scissors'
 	) {
-		console.log('Computer Wins');
+		return COMPUTER;
 	} else if (
 		playerSelection.toLowerCase() === 'scissors' &&
 		computerSelection.toLowerCase() === 'rock'
 	) {
-		console.log('Computer Wins');
+		return COMPUTER;
 	}
 }
 
-let computerChoice = getComputerChoice();
+function game() {
+	let playerScore = 0;
+	let computerScore = 0;
+
+	for (let i = 0; i < 5; i++) {
+		let computerChoice = getComputerChoice();
+		let playerChoice = prompt('Enter Rock, Paper or Scissors');
+
+		let games = playRound(playerChoice, computerChoice);
+
+		if (games === 0) {
+			playerScore += 1;
+		} else if (games === 1) {
+			computerScore += 1;
+		}
+
+		console.log(`Player Score ${playerScore}\nComputer Score ${computerScore}`);
+	}
+
+	if (playerScore > computerScore) {
+		console.log(`You won with ${playerScore} points!`);
+	} else if (playerScore === computerScore) {
+		console.log(`You tied with ${playerScore} points each!`);
+	} else {
+		console.log(`Computer Wins with ${computerScore} points!`);
+	}
+}
