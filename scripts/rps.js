@@ -54,32 +54,28 @@ function playRound(playerSelection, computerSelection) {
 }
 
 btn.forEach((button) => {
-	button.addEventListener(
-		'click',
-		() => {
-			games = playRound(button.textContent, computerSelection());
-			if (games === 0) {
-				playerScore += 1;
-			} else if (games === 1) {
-				computerScore += 1;
-			}
-			score.textContent = `Player: ${playerScore}`;
-			compScore.textContent = `Computer: ${computerScore}`;
-			scores.appendChild(score);
-			scores.appendChild(compScore);
+	button.addEventListener('click', () => {
+		games = playRound(button.textContent, computerSelection());
+		if (games === 0) {
+			playerScore += 1;
+		} else if (games === 1) {
+			computerScore += 1;
+		}
+		score.textContent = `Player: ${playerScore}`;
+		compScore.textContent = `Computer: ${computerScore}`;
+		scores.appendChild(score);
+		scores.appendChild(compScore);
 
-			if (playerScore === 5 || computerScore === 5) {
-				if (playerScore > computerScore) {
-					div.textContent = 'You Won!';
-					content.appendChild(div);
-				} else {
-					div.textContent = 'Computer Wins!';
-					content.appendChild(div);
-				}
-				playerScore = 0;
-				computerScore = 0;
+		if (playerScore === 5 || computerScore === 5) {
+			if (playerScore > computerScore) {
+				div.textContent = 'You Won!';
+				content.appendChild(div);
+			} else {
+				div.textContent = 'Computer Wins!';
+				content.appendChild(div);
 			}
-		},
-		{ capture: false }
-	);
+			playerScore = 0;
+			computerScore = 0;
+		}
+	});
 });
